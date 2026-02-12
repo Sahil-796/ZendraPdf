@@ -3,12 +3,11 @@
 import { Label } from "@/components/ui/label";
 import useUser from "@/hooks/useUser";
 import { authClient } from "@/lib/auth-client";
-import { User, Mail, Save } from "lucide-react";
+import { User, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Card, CardContent } from "../ui/card";
 
 const ProfileTab = () => {
   const { user } = useUser();
@@ -27,7 +26,7 @@ const ProfileTab = () => {
       if (name.trim() === user?.name) return;
       await authClient.updateUser({ name: name.trim() });
       toast.success("Profile updated");
-    } catch (err) {
+    } catch {
       toast.error("Update failed");
     } finally {
       setLoading(false);

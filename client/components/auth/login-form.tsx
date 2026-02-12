@@ -65,7 +65,7 @@ export function LoginForm({
         callbackURL: callbackUrl,
         errorCallbackURL: "/login?error=oauth_error",
       });
-    } catch (error) {
+    } catch {
       toast.error("Failed to sign in with Google");
       setIsGoogleLoading(false);
     }
@@ -94,7 +94,7 @@ export function LoginForm({
         // Use replace to prevent back navigation to login
         router.replace(callbackUrl);
       }
-    } catch (error) {
+    } catch {
       toast.error("An unexpected error occurred");
       setIsLoading(false);
     }

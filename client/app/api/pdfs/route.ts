@@ -16,7 +16,7 @@ export async function GET(req: Request) {
 
     const pdfs = await getAllPdfs(session.user.id);
     return NextResponse.json(pdfs);
-  } catch (err) {
+  } catch {
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     await createPdf(id, session.user.id, fileName || "Untitled", "");
 
     return NextResponse.json({ id, fileName, status: 200 });
-  } catch (err) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to create PDF" },
       { status: 500 },

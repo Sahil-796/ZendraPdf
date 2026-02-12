@@ -53,7 +53,7 @@ export function useAiEdit() {
       setAiResponse(cleanHtml);
       setAiStatus("aiResult");
 
-      queryClient.setQueryData(userKeys.profile(), (oldData: any) => {
+      queryClient.setQueryData(userKeys.profile(), (oldData: { creditsLeft?: number } | undefined) => {
         if (!oldData) return oldData;
         return {
           ...oldData,

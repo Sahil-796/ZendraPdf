@@ -37,8 +37,8 @@ export async function POST(req: Request) {
     try {
       creditsLeft = await deduceCredits(userId, 4);
       creditsDeducted = true;
-    } catch (creditErr: any) {
-      if (creditErr.message?.includes("Insufficient")) {
+    } catch (creditErr: unknown) {
+      if (creditErr instanceof Error && creditErr.message?.includes("Insufficient")) {
         return NextResponse.json(
           { error: "Insufficient credits" },
           { status: 429 },
@@ -85,7 +85,7 @@ export async function POST(req: Request) {
       creditsLeft,
       status: 200,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("HTML Generate Error:", err);
     if (userId && creditsDeducted) {
       try {
@@ -95,7 +95,7 @@ export async function POST(req: Request) {
       }
     }
     return NextResponse.json(
-      { success: false, message: err.message || "Internal Error" },
+      { success: false, message: err instanceof Error ? err.message : "Internal Error" },
       { status: 500 },
     );
   }

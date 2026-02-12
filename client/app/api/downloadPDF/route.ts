@@ -86,7 +86,7 @@ export async function POST(req: Request) {
 
     await browser.close();
 
-    return new Response(pdfBuffer as any, {
+    return new Response(new Uint8Array(pdfBuffer), {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",

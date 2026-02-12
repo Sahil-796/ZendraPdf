@@ -69,9 +69,9 @@ const DownloadPDF = () => {
       window.URL.revokeObjectURL(url);
 
       toast.success("PDF Downloaded successfully");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      toast.error(err.message || "Failed to download PDF");
+      toast.error(err instanceof Error ? err.message : "Failed to download PDF");
     } finally {
       setLoading(false);
     }

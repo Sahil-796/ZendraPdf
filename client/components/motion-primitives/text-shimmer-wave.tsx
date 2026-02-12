@@ -1,6 +1,6 @@
 'use client';
 import { type JSX } from 'react';
-import { motion, Transition } from 'motion/react';
+import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 import { TextShimmerWaveProps } from '@/types/components';

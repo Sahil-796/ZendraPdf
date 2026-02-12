@@ -20,9 +20,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
-import { cn } from "@/lib/utils"
 
 export function NavProjects({
   projects,

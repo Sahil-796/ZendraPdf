@@ -60,7 +60,7 @@ const BillingTab = () => {
         setSubData(null);
       }
     } catch (error) {
-      console.error(error);
+      console.error("Billing error:", error);
       toast.error("Failed to load billing details");
     } finally {
       setLoading(false);
@@ -82,7 +82,7 @@ const BillingTab = () => {
 
       toast.success("Subscription canceled. Access remains until period end.");
       fetchBillingData(); // Refresh UI
-    } catch (error) {
+    } catch {
       toast.error("Could not cancel subscription");
     } finally {
       setCancelling(false);
@@ -298,8 +298,12 @@ const BillingTab = () => {
   );
 };
 
+interface UserData {
+  creditsLeft?: number;
+}
+
 // Extracted Credit Section for cleaner code
-const CreditSection = ({ user }: { user: any }) => (
+const CreditSection = ({ user }: { user: UserData }) => (
   <div className="space-y-4">
     <div className="flex items-center justify-between">
       <h3 className="text-lg font-medium">Credit Balance</h3>

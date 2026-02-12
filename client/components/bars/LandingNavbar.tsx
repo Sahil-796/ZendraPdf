@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import Image from "next/image";
 import ThemeToggle from "../theme/ThemeToggle";
 import { useState, useEffect } from "react";
 import { useSession } from "@/hooks/useSession";
@@ -108,9 +109,11 @@ export default function Navbar() {
     <Loader2 className="h-4 w-4 animate-spin" />
   ) : user ? (
     user.avatar ? (
-      <img
+      <Image
         src={user.avatar}
         alt={user.name || "User"}
+        width={36}
+        height={36}
         className="w-full h-full rounded-full object-cover"
       />
     ) : (

@@ -142,9 +142,9 @@ const MergePdf = () => {
       a.click();
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      toast.error(err.message || "Merge Failed");
+      toast.error(err instanceof Error ? err.message : "Merge Failed");
     } finally {
       setIsMerging(false);
     }
