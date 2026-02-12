@@ -62,7 +62,7 @@ export default function Pricing() {
     {
       name: "Creator",
       id: "creator",
-      price: "$3.99",
+      price: "$1.99",
       description: "For power users who need professional results.",
       features: [
         "100 AI credits per day",
