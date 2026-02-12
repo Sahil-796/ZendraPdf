@@ -70,7 +70,7 @@ export function SignupForm({
         errorCallbackURL: "/signup?error=oauth_error",
         newUserCallbackURL: callbackUrl,
       });
-    } catch (error) {
+    } catch {
       toast.error("Failed to sign in with Google");
       setIsGoogleLoading(false);
     }
@@ -99,7 +99,7 @@ export function SignupForm({
         );
         router.replace(callbackUrl);
       }
-    } catch (error) {
+    } catch {
       toast.error("An unexpected error occurred");
       setIsLoading(false);
     }

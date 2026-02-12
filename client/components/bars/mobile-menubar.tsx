@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "../theme/ThemeToggle";
 import {
@@ -137,8 +138,10 @@ const MobileMenubar: React.FC<MobileMenubarProps> = ({
                   <div className="flex items-center gap-3 bg-background p-3 rounded-xl border border-border/50 shadow-sm">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0">
                       {user.avatar ? (
-                        <img
+                        <Image
                           src={user.avatar}
+                          width={40}
+                          height={40}
                           className="w-full h-full rounded-full object-cover"
                           alt=""
                         />

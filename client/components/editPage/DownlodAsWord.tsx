@@ -72,9 +72,9 @@ const DownloadAsWord = () => {
       URL.revokeObjectURL(url);
 
       toast.success("Word Document Downloaded");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      toast.error(err.message || "Failed to download Word file.");
+      toast.error(err instanceof Error ? err.message : "Failed to download Word file.");
     } finally {
       setLoading(false);
     }

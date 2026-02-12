@@ -18,7 +18,7 @@ export async function GET(req: Request, { params }: Props) {
 
     const files = await getContextFiles(id);
     return NextResponse.json({ files });
-  } catch (err) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch files" },
       { status: 500 },
@@ -67,7 +67,7 @@ export async function POST(req: Request, { params }: Props) {
     if (!updated) await createContextFile(id, file.name);
 
     return NextResponse.json({ success: true, fileName: file.name });
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err);
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
@@ -105,7 +105,7 @@ export async function DELETE(req: Request, { params }: Props) {
     await removeContextFile(id, filename);
 
     return NextResponse.json({ success: true });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "Delete failed" }, { status: 500 });
   }
 }

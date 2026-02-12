@@ -1,8 +1,7 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CreditCard, Lock, Settings, User, Sparkles } from "lucide-react";
+import { CreditCard, Lock, Settings, User } from "lucide-react";
 import ProfileTab from "./profile-tab";
 import SecurityTab from "./security-tab";
 import BillingTab from "./billing-tab";
@@ -88,8 +87,10 @@ const AccountSettings = () => {
   );
 };
 
+import { type LucideIcon } from "lucide-react";
+
 // Helper Components
-const TabItem = ({ value, icon: Icon, label }: any) => (
+const TabItem = ({ value, icon: Icon, label }: { value: string; icon: LucideIcon; label: string }) => (
   <TabsTrigger
     value={value}
     className="w-full justify-start gap-3 px-3 py-2.5 text-sm font-medium rounded-md data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:bg-muted/50 transition-colors"

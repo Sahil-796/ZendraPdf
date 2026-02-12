@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       "webhook-id": webhookId,
       "webhook-signature": signature,
       "webhook-timestamp": timestamp,
-    }) as any;
+    }) as { type: string; data: Record<string, unknown> };
   } catch (err) {
     console.error("Webhook verification failed:", err);
     return new Response("Invalid signature", { status: 400 });

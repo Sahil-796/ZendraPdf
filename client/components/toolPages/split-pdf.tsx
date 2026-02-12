@@ -119,7 +119,7 @@ const SplitPDF = () => {
     }
 
     // Validate Input Format
-    const valid = /^[0-9,\-]*$/.test(item.configValue);
+    const valid = /^[0-9,-]*$/.test(item.configValue);
     if (!valid) {
       toast.error(
         `Invalid format in "${item.file.name}". Use numbers, commas, and hyphens.`,

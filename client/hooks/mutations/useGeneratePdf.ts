@@ -29,7 +29,7 @@ export function useGeneratePdf() {
       return res.json();
     },
     onSuccess: (data, variables) => {
-      queryClient.setQueryData(userKeys.profile(), (oldUser: any) => {
+      queryClient.setQueryData(userKeys.profile(), (oldUser: { creditsLeft?: number } | undefined) => {
         if (!oldUser) return oldUser;
         return {
           ...oldUser,

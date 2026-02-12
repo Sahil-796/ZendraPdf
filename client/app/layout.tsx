@@ -1,8 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
-import { Toaster } from "sonner";
-import { CommandPaletteProvider } from "@/components/providers/CommandPaletteProvider";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import Providers from "@/components/providers/Providers";

@@ -47,10 +47,10 @@ export async function POST(req: Request) {
         "Content-Disposition": `attachment; filename="${file.name.replace(".pdf", "_split.pdf")}"`,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error in route:", error);
     return NextResponse.json(
-      { message: "Internal Server Error", error: error.message },
+      { message: "Internal Server Error", error: error instanceof Error ? error.message : "Unknown error" },
       { status: 500 },
     );
   }

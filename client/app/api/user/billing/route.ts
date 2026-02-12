@@ -7,7 +7,7 @@ const polar = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN!,
 });
 
-export async function GET(req: Request) {
+export async function GET() {
   const session = await auth.api.getSession({ headers: await headers() });
 
   if (!session || !session.user.polarSubscriptionId) {
@@ -47,7 +47,7 @@ export async function GET(req: Request) {
 }
 
 // Endpoint to cancel subscription
-export async function DELETE(req: Request) {
+export async function DELETE() {
   const session = await auth.api.getSession({ headers: await headers() });
 
   if (!session?.user?.polarSubscriptionId) {
@@ -65,7 +65,7 @@ export async function DELETE(req: Request) {
       },
     });
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to cancel subscription" },
       { status: 500 },

@@ -26,7 +26,7 @@ export async function GET(req: Request, { params }: Props) {
       return NextResponse.json({ error: "PDF not found" }, { status: 404 });
 
     return NextResponse.json({ pdf });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
 }
@@ -59,7 +59,7 @@ export async function PATCH(req: Request, { params }: Props) {
       return NextResponse.json({ error: "PDF not found" }, { status: 404 });
 
     return NextResponse.json({ pdf: updated, message: "Saved" });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "Update failed" }, { status: 500 });
   }
 }
@@ -78,7 +78,7 @@ export async function DELETE(req: Request, { params }: Props) {
       return NextResponse.json({ error: "PDF not found" }, { status: 404 });
 
     return NextResponse.json({ success: true });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
 }

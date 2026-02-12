@@ -24,6 +24,7 @@ const AccountHeader = () => {
 
   const handleVerifyEmail = async () => {
     try {
+      // Verification logic can be added here
     } catch (error) {
       console.error(error);
       toast.error("Failed to send verification email");

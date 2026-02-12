@@ -7,9 +7,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
 
 export function NavMain({
   items,
