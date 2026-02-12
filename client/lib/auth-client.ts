@@ -6,4 +6,5 @@ export const authClient = createAuthClient({
   plugins: [polarPlugin()],
 });
 
-export const { signIn, signUp, useSession } = createAuthClient();
+// Export from the same client instance to share cache and state
+export const { signIn, signUp, useSession } = authClient;

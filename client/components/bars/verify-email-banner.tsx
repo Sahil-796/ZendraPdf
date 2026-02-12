@@ -16,11 +16,19 @@ import useUser from '@/hooks/useUser'
 
 const VerifyEmailBanner = () => {
     const { loading, user } = useUser()
-    if (loading || !user.id) return
+    
+    // Don't show banner if:
+    // - Still loading session
+    // - No user (not authenticated)
+    // - Email is already verified
+    if (loading || !user?.id || user.emailVerified) {
+        return null
+    }
+
     return (
         <StickyBanner hideOnScroll={true}>
             <div className="flex items-center justify-center gap-2 text-center sm:text-left sm:flex-row flex-col">
-                <span className='font-medium text-sm sm:text-base'>Please check your email to verify your accout.</span>
+                <span className='font-medium text-sm sm:text-base'>Please check your email to verify your account.</span>
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
                         <Button size="sm" className='cursor-pointer'>Resend Email</Button>

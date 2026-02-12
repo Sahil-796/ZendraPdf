@@ -17,10 +17,38 @@ const HISTORY_REASONS: Record<string, string> = {
 };
 
 export const deduceCredits = async (userId: string, cost: number) => {
-  await ensureDailyAllowance(userId);
-
   try {
     return await db.transaction(async (tx) => {
+      // Lock user row FIRST to prevent race conditions
+      const [lockedUser] = await tx
+        .select({
+          id: user.id,
+          plan: user.plan,
+          creditsLeft: user.creditsLeft,
+          creditsResetAt: user.creditsResetAt,
+        })
+        .from(user)
+        .where(eq(user.id, userId))
+        .for("update");
+
+      if (!lockedUser) {
+        throw new Error(`User not found with id: ${userId}`);
+      }
+
+      // Check daily allowance inside the locked transaction
+      const todayUTC = formatInTimeZone(new Date(), "UTC", "yyyy-MM-dd");
+      let currentCredits = lockedUser.creditsLeft;
+
+      if (lockedUser.creditsResetAt < todayUTC) {
+        // Reset credits
+        currentCredits = DAILY_ALLOWANCE[lockedUser.plan] ?? DAILY_ALLOWANCE.free;
+        await tx
+          .update(user)
+          .set({ creditsLeft: currentCredits, creditsResetAt: todayUTC })
+          .where(eq(user.id, userId));
+      }
+
+      // Now check and deduct credits atomically
       const [updatedUser] = await tx
         .update(user)
         .set({
@@ -30,16 +58,6 @@ export const deduceCredits = async (userId: string, cost: number) => {
         .returning({ creditsLeft: user.creditsLeft });
 
       if (!updatedUser) {
-        const [userExists] = await tx
-          .select({ id: user.id })
-          .from(user)
-          .where(eq(user.id, userId))
-          .limit(1);
-
-        if (!userExists) {
-          throw new Error(`User not found with id: ${userId}`);
-        }
-
         throw new Error("Insufficient credits");
       }
 
