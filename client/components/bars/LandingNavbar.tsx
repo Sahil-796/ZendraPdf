@@ -4,7 +4,6 @@ import {
   Loader2,
   LogOut,
   User,
-  Coins,
   Search,
   Menu,
   Plus,
@@ -28,7 +27,7 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import ThemeToggle from "../theme/ThemeToggle";
 import { useState, useEffect } from "react";
-import useUser from "@/hooks/useUser";
+import { useSession } from "@/hooks/useSession";
 import { Logo } from "../Logo";
 import { useCommandPalette } from "@/hooks/useCommandPalette";
 import MobileMenubar from "./mobile-menubar";
@@ -92,7 +91,7 @@ const navigationLinks = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { user, loading } = useUser();
+  const { user, loading } = useSession();
   const { setOpen } = useCommandPalette();
   const { mutate: logout, isPending } = useLogout();
 
@@ -249,25 +248,6 @@ export default function Navbar() {
                       <p className="text-xs text-muted-foreground truncate">
                         {user.email}
                       </p>
-                    </div>
-
-                    <div className="mt-2 mb-2 px-2">
-                      <div className="flex items-center justify-between p-2 rounded-lg bg-muted/50 border border-border/50">
-                        <div className="flex items-center gap-2">
-                          <Coins className="w-3.5 h-3.5 text-yellow-500" />
-                          <span className="text-xs font-medium">
-                            {user.creditsLeft} Credits
-                          </span>
-                        </div>
-                        {!user.isCreator && (
-                          <Link
-                            href="/pricing"
-                            className="text-[10px] font-bold text-primary hover:underline"
-                          >
-                            UPGRADE
-                          </Link>
-                        )}
-                      </div>
                     </div>
 
                     <Separator className="my-1" />

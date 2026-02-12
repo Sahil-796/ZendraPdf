@@ -36,8 +36,8 @@ interface MobileMenubarProps {
     name: string;
     email: string;
     avatar?: string;
-    isCreator: boolean;
-    creditsLeft: number;
+    isCreator?: boolean;
+    creditsLeft?: number;
     plan?: string;
   } | null;
   handleLogout?: () => void;
@@ -182,9 +182,11 @@ const MobileMenubar: React.FC<MobileMenubarProps> = ({
 
                   {/* Credits & Logout */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/10 text-yellow-600 text-xs font-medium">
-                      <Coins className="w-3.5 h-3.5" /> {user.creditsLeft}
-                    </div>
+                    {user.creditsLeft !== undefined && (
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/10 text-yellow-600 text-xs font-medium">
+                        <Coins className="w-3.5 h-3.5" /> {user.creditsLeft}
+                      </div>
+                    )}
 
                     <button
                       onClick={handleLogout}
