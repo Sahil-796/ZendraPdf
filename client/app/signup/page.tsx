@@ -1,6 +1,16 @@
 import { SignupForm } from "@/components/auth/signup-form";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
+import { Suspense } from "react";
+import { Loader2 } from "lucide-react";
+
+function SignupFormFallback() {
+  return (
+    <div className="flex items-center justify-center p-8">
+      <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+    </div>
+  );
+}
 
 export default function SignupPage() {
   return (
@@ -9,7 +19,9 @@ export default function SignupPage() {
         <Link href="/" className="flex items-center justify-center">
           <Logo size="md" showSubtitle={true} showText={true} />
         </Link>
-        <SignupForm />
+        <Suspense fallback={<SignupFormFallback />}>
+          <SignupForm />
+        </Suspense>
       </div>
     </div>
   );
